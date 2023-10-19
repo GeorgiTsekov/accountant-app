@@ -2,14 +2,14 @@
 
 namespace AccountantWPF.Data.Models
 {
-    public class CashPosIncome : BaseCashPosNameDeletableModel
+    public class CashPos : BaseCashPosDeletableModel
     {
-        public CashPosIncome()
+        public CashPos()
         {
             CashRegisters = new List<CashRegister>();
         }
 
-        public int IncomeId { get; set; }
+        public string IncomeName { get; set; } = string.Empty;
         public virtual Income? Income { get; set; }
         public virtual ICollection<CashRegister> CashRegisters { get; set; }
     }
