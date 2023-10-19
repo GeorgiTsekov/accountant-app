@@ -1,10 +1,16 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using System.Windows;
+using System.Windows.Threading;
+
+using AccountantWPF.Data;
+
+using CommunityToolkit.Mvvm.Messaging;
+
 using MaterialDesignThemes.Wpf;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace AccountantWPF;
 
@@ -18,6 +24,11 @@ public partial class App : Application
     {
         using IHost host = CreateHostBuilder(args).Build();
         host.Start();
+
+        using (var context = host.Services.GetRequiredService<AccountantDbContext>())
+        {
+            context.Database.Migrate();
+        }
 
         App app = new();
         app.InitializeComponent();
@@ -39,6 +50,8 @@ public partial class App : Application
             services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider => provider.GetRequiredService<WeakReferenceMessenger>());
 
             services.AddSingleton(_ => Current.Dispatcher);
+
+            services.AddDbContext<AccountantDbContext>();
 
             services.AddTransient<ISnackbarMessageQueue>(provider =>
             {
