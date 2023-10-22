@@ -2,6 +2,10 @@
 using System.Windows.Threading;
 
 using AccountantWPF.Data;
+using AccountantWPF.Features.CashPosIncomes;
+using AccountantWPF.Features.CashRegisters;
+using AccountantWPF.Features.Shifts;
+using AccountantWPF.Incomes;
 
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -58,5 +62,10 @@ public partial class App : Application
                 Dispatcher dispatcher = provider.GetRequiredService<Dispatcher>();
                 return new SnackbarMessageQueue(TimeSpan.FromSeconds(3.0), dispatcher);
             });
+
+            services.AddScoped<IncomeService>();
+            services.AddScoped<CashPosService>();
+            services.AddScoped<CashRegisterService>();
+            services.AddScoped<ShiftService>();
         });
 }
