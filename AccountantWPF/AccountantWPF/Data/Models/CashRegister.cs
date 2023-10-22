@@ -1,4 +1,6 @@
-﻿using AccountantWPF.Data.BaseModels;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+using AccountantWPF.Data.BaseModels;
 
 namespace AccountantWPF.Data.Models
 {
@@ -9,7 +11,13 @@ namespace AccountantWPF.Data.Models
             Shifts = new List<Shift>();
         }
 
-        public string CashPosName { get; set; } = string.Empty;
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Cash => Shifts.Where(x => !x.IsDeleted && x.CreatedOn == CreatedOn).Sum(x => x.Cash);
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Pos => Shifts.Where(x => !x.IsDeleted && x.CreatedOn == CreatedOn).Sum(x => x.Pos);
+
+        public int CashPosId { get; set; }
         public virtual CashPos? CashPos { get; set; }
         public virtual ICollection<Shift> Shifts { get; set; }
     }

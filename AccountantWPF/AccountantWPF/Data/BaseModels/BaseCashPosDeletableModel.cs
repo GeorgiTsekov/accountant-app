@@ -2,12 +2,8 @@
 
 namespace AccountantWPF.Data.BaseModels
 {
-    public abstract class BaseCashPosDeletableModel : BaseDeletableModel, ICashPosEntity
+    public abstract class BaseCashPosDeletableModel : BaseDeletableModel
     {
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Cash { get; set; }
-
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Pos { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

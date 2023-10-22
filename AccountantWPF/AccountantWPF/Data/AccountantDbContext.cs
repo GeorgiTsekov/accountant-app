@@ -6,11 +6,7 @@ namespace AccountantWPF.Data
 {
     public class AccountantDbContext : DbContext
     {
-        public AccountantDbContext()
-        {
-        }
-
-        public AccountantDbContext(DbContextOptions<AccountantDbContext> options)
+        public AccountantDbContext(DbContextOptions options)
             : base(options)
         {
         }

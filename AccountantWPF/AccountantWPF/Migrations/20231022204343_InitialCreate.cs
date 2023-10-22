@@ -15,40 +15,40 @@ namespace AccountantWPF.Migrations
                 name: "Incomes",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Cash = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Pos = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Incomes", x => x.Name);
+                    table.PrimaryKey("PK_Incomes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "CashPosIncomes",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    IncomeName = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    IncomeId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Cash = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Pos = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CashPosIncomes", x => x.Name);
+                    table.PrimaryKey("PK_CashPosIncomes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CashPosIncomes_Incomes_IncomeName",
-                        column: x => x.IncomeName,
+                        name: "FK_CashPosIncomes_Incomes_IncomeId",
+                        column: x => x.IncomeId,
                         principalTable: "Incomes",
-                        principalColumn: "Name",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -56,23 +56,23 @@ namespace AccountantWPF.Migrations
                 name: "CashRegisters",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    CashPosName = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CashPosId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Cash = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Pos = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CashRegisters", x => x.Name);
+                    table.PrimaryKey("PK_CashRegisters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CashRegisters_CashPosIncomes_CashPosName",
-                        column: x => x.CashPosName,
+                        name: "FK_CashRegisters_CashPosIncomes_CashPosId",
+                        column: x => x.CashPosId,
                         principalTable: "CashPosIncomes",
-                        principalColumn: "Name",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -80,42 +80,44 @@ namespace AccountantWPF.Migrations
                 name: "Shifts",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     CashierName = table.Column<string>(type: "TEXT", nullable: true),
                     Bonnets = table.Column<int>(type: "INTEGER", nullable: true),
-                    CashRegisterName = table.Column<string>(type: "TEXT", nullable: false),
+                    CashRegisterId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Cash = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Pos = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Cash = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Pos = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shifts", x => x.Name);
+                    table.PrimaryKey("PK_Shifts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shifts_CashRegisters_CashRegisterName",
-                        column: x => x.CashRegisterName,
+                        name: "FK_Shifts_CashRegisters_CashRegisterId",
+                        column: x => x.CashRegisterId,
                         principalTable: "CashRegisters",
-                        principalColumn: "Name",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CashPosIncomes_IncomeName",
+                name: "IX_CashPosIncomes_IncomeId",
                 table: "CashPosIncomes",
-                column: "IncomeName");
+                column: "IncomeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CashRegisters_CashPosName",
+                name: "IX_CashRegisters_CashPosId",
                 table: "CashRegisters",
-                column: "CashPosName");
+                column: "CashPosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shifts_CashRegisterName",
+                name: "IX_Shifts_CashRegisterId",
                 table: "Shifts",
-                column: "CashRegisterName");
+                column: "CashRegisterId");
         }
 
         /// <inheritdoc />

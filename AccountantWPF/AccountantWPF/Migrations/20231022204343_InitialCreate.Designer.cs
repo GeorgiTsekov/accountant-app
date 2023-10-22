@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccountantWPF.Migrations
 {
     [DbContext(typeof(AccountantDbContext))]
-    [Migration("20231019194313_InitialCreate")]
+    [Migration("20231022204343_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -22,11 +22,9 @@ namespace AccountantWPF.Migrations
 
             modelBuilder.Entity("AccountantWPF.Data.Models.CashPos", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Cash")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("TEXT");
@@ -34,9 +32,8 @@ namespace AccountantWPF.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("IncomeName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("IncomeId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
@@ -44,27 +41,25 @@ namespace AccountantWPF.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Pos")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
-                    b.HasIndex("IncomeName");
+                    b.HasIndex("IncomeId");
 
                     b.ToTable("CashPosIncomes");
                 });
 
             modelBuilder.Entity("AccountantWPF.Data.Models.CashRegister", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Cash")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("CashPosName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CashPosId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("TEXT");
@@ -78,23 +73,22 @@ namespace AccountantWPF.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Pos")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CashPosName");
+                    b.HasIndex("CashPosId");
 
                     b.ToTable("CashRegisters");
                 });
 
             modelBuilder.Entity("AccountantWPF.Data.Models.Income", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Cash")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("TEXT");
@@ -108,18 +102,20 @@ namespace AccountantWPF.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Pos")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
                     b.ToTable("Incomes");
                 });
 
             modelBuilder.Entity("AccountantWPF.Data.Models.Shift", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("Bonnets")
                         .HasColumnType("INTEGER");
@@ -127,9 +123,8 @@ namespace AccountantWPF.Migrations
                     b.Property<decimal>("Cash")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("CashRegisterName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CashRegisterId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CashierName")
                         .HasColumnType("TEXT");
@@ -146,12 +141,16 @@ namespace AccountantWPF.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("Pos")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CashRegisterName");
+                    b.HasIndex("CashRegisterId");
 
                     b.ToTable("Shifts");
                 });
@@ -160,7 +159,7 @@ namespace AccountantWPF.Migrations
                 {
                     b.HasOne("AccountantWPF.Data.Models.Income", "Income")
                         .WithMany("CashPosIncomes")
-                        .HasForeignKey("IncomeName")
+                        .HasForeignKey("IncomeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -171,7 +170,7 @@ namespace AccountantWPF.Migrations
                 {
                     b.HasOne("AccountantWPF.Data.Models.CashPos", "CashPos")
                         .WithMany("CashRegisters")
-                        .HasForeignKey("CashPosName")
+                        .HasForeignKey("CashPosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -182,7 +181,7 @@ namespace AccountantWPF.Migrations
                 {
                     b.HasOne("AccountantWPF.Data.Models.CashRegister", "CashRegister")
                         .WithMany("Shifts")
-                        .HasForeignKey("CashRegisterName")
+                        .HasForeignKey("CashRegisterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
