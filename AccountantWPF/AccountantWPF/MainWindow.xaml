@@ -1,9 +1,11 @@
 ﻿<Window x:Class="AccountantWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AccountantWPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:AccountantWPF"
+        xmlns:incomes="clr-namespace:AccountantWPF.Features.Incomes" 
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel, IsDesignTimeCreatable=False}"
         Style="{StaticResource MaterialDesignWindow}"
@@ -28,15 +30,32 @@
             Width="35"
             Height="35"
             HorizontalAlignment="Center"
-            Kind="Money100" />
+            Kind="Plus" />
             <TextBlock
             HorizontalAlignment="Center"
             TextAlignment="Center"
-            Text="Приходи" 
+            Text="Приходи Добави" 
             TextWrapping="Wrap"/>
           </StackPanel>
         </TabItem.Header>
-        <TextBlock Text="TODO" />
+        <incomes:AddIncomeView x:Name="AddIncomeView" />
+      </TabItem>
+      <TabItem>
+        <TabItem.Header>
+          <StackPanel>
+            <materialDesign:PackIcon
+              Width="35"
+              Height="35"
+              HorizontalAlignment="Center"
+              Kind="Money100" />
+            <TextBlock
+              HorizontalAlignment="Center"
+              TextAlignment="Center"
+              Text="Приходи" 
+              TextWrapping="Wrap"/>
+          </StackPanel>
+        </TabItem.Header>
+        <incomes:ViewIncomesView x:Name="ViewIncomesView" />
       </TabItem>
       <TabItem>
         <TabItem.Header>
@@ -53,7 +72,7 @@
             TextWrapping="Wrap"/>
           </StackPanel>
         </TabItem.Header>
-        <TextBlock Text="TODO" />
+        <TextBlock d:Text="TODO" />
       </TabItem>
       <TabItem>
         <TabItem.Header>

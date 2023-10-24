@@ -2,7 +2,7 @@
 using AccountantWPF.Data;
 using AccountantWPF.Data.Models;
 
-namespace AccountantWPF.Incomes
+namespace AccountantWPF.Features.Incomes
 {
     public class IncomeService : BaseDeletableRepository<Income>
     {

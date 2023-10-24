@@ -5,7 +5,7 @@ using AccountantWPF.Data;
 using AccountantWPF.Features.CashPosIncomes;
 using AccountantWPF.Features.CashRegisters;
 using AccountantWPF.Features.Shifts;
-using AccountantWPF.Incomes;
+using AccountantWPF.Features.Incomes;
 
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -28,8 +28,8 @@ public partial class App : Application
     {
         using IHost host = CreateHostBuilder(args).Build();
         host.Start();
-
-        using (var context = host.Services.GetRequiredService<AccountantDbContext>())
+        using (var scope = host.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        using (var context = scope.ServiceProvider.GetRequiredService<AccountantDbContext>())
         {
             context.Database.Migrate();
         }
@@ -63,9 +63,11 @@ public partial class App : Application
                 return new SnackbarMessageQueue(TimeSpan.FromSeconds(3.0), dispatcher);
             });
 
-            services.AddScoped<IncomeService>();
-            services.AddScoped<CashPosService>();
-            services.AddScoped<CashRegisterService>();
-            services.AddScoped<ShiftService>();
+            services.AddSingleton<IncomeService>();
+            services.AddSingleton<ViewIncomesViewModel>();
+            services.AddSingleton<AddIncomeViewModel>();
+            services.AddSingleton<CashPosService>();
+            services.AddSingleton<CashRegisterService>();
+            services.AddSingleton<ShiftService>();
         });
 }

@@ -1,5 +1,7 @@
 ﻿using System.Windows.Input;
 
+using AccountantWPF.Features.Incomes;
+
 namespace AccountantWPF;
 
 /// <summary>
@@ -7,10 +9,14 @@ namespace AccountantWPF;
 /// </summary>
 public partial class MainWindow
 {
-    public MainWindow(MainWindowViewModel viewModel)
+    public MainWindow(ViewIncomesViewModel viewIncomesModelModel, AddIncomeViewModel addIncomeViewModel)
     {
-        DataContext = viewModel;
+        //DataContext = viewModel;
+
         InitializeComponent();
+
+        AddIncomeView.DataContext = addIncomeViewModel;
+        ViewIncomesView.DataContext = viewIncomesModelModel;
 
         CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, OnClose));
     }
