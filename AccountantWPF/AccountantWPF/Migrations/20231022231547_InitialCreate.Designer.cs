@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccountantWPF.Migrations
 {
     [DbContext(typeof(AccountantDbContext))]
-    [Migration("20231022204343_InitialCreate")]
+    [Migration("20231022231547_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
