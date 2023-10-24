@@ -7,16 +7,14 @@ namespace AccountantWPF.Tests
 {
     public abstract class TestBase
     {
-        public async Task<AccountantDbContext> GetDbContext(bool isNewDb)
+        public async Task<AccountantDbContext> GetDbContext(bool useNewDb)
         {
             var connection = new SqliteConnection($"DataSource=:memory:");
-            var builder = new DbContextOptionsBuilder();
+            var builder = new DbContextOptionsBuilder<AccountantDbContext>();
             builder.UseSqlite(connection, x => { });
 
-            var options = new DbContextOptionsBuilder<AccountantDbContext>().Options;
-
             var dbContext = new AccountantDbContext(builder.Options);
-            if (isNewDb)
+            if (useNewDb)
             {
                 await dbContext.Database.EnsureDeletedAsync();
             }

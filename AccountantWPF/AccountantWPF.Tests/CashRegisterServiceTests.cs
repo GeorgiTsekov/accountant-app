@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AccountantWPF.Data.Models;
+﻿using AccountantWPF.Data.Models;
 using AccountantWPF.Features.CashPosIncomes;
 using AccountantWPF.Features.CashRegisters;
-using AccountantWPF.Incomes;
+using AccountantWPF.Features.Incomes;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountantWPF.Tests

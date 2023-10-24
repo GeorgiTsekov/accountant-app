@@ -2,7 +2,7 @@
 using AccountantWPF.Features.CashPosIncomes;
 using AccountantWPF.Features.CashRegisters;
 using AccountantWPF.Features.Shifts;
-using AccountantWPF.Incomes;
+using AccountantWPF.Features.Incomes;
 
 using Microsoft.EntityFrameworkCore;
 

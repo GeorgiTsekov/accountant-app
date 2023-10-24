@@ -1,6 +1,6 @@
 ﻿using AccountantWPF.Data.Models;
 using AccountantWPF.Features.CashPosIncomes;
-using AccountantWPF.Incomes;
+using AccountantWPF.Features.Incomes;
 
 using Microsoft.EntityFrameworkCore;
 
