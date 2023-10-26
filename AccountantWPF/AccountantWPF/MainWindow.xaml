@@ -28,13 +28,13 @@
           <StackPanel>
             <materialDesign:PackIcon
             Width="35"
-            Height="35"
+            Height="25"
             HorizontalAlignment="Center"
             Kind="Plus" />
             <TextBlock
             HorizontalAlignment="Center"
             TextAlignment="Center"
-            Text="Приходи Добави" 
+            Text="Добави Приход" 
             TextWrapping="Wrap"/>
           </StackPanel>
         </TabItem.Header>
@@ -45,13 +45,13 @@
           <StackPanel>
             <materialDesign:PackIcon
               Width="35"
-              Height="35"
+              Height="25"
               HorizontalAlignment="Center"
               Kind="Money100" />
             <TextBlock
               HorizontalAlignment="Center"
               TextAlignment="Center"
-              Text="Приходи" 
+              Text="Всички Приходи" 
               TextWrapping="Wrap"/>
           </StackPanel>
         </TabItem.Header>
@@ -62,51 +62,17 @@
           <StackPanel>
             <materialDesign:PackIcon
             Width="35"
-            Height="35"
+            Height="25"
             HorizontalAlignment="Center"
             Kind="CashRegister" />
             <TextBlock
             HorizontalAlignment="Center"
             TextAlignment="Center"
-            Text="Каси" 
+            Text="Дневен Приход" 
             TextWrapping="Wrap"/>
           </StackPanel>
         </TabItem.Header>
         <TextBlock d:Text="TODO" />
-      </TabItem>
-      <TabItem>
-        <TabItem.Header>
-          <StackPanel>
-            <materialDesign:PackIcon
-            Width="35"
-            Height="35"
-            HorizontalAlignment="Center"
-            Kind="CashPlus" />
-            <TextBlock
-            HorizontalAlignment="Center"
-            TextAlignment="Center"
-            Text="КешПос Приходи" 
-            TextWrapping="Wrap"/>
-          </StackPanel>
-        </TabItem.Header>
-        <TextBlock Text="TODO" />
-      </TabItem>
-      <TabItem>
-        <TabItem.Header>
-          <StackPanel>
-            <materialDesign:PackIcon
-            Width="35"
-            Height="35"
-            HorizontalAlignment="Center"
-            Kind="People" />
-            <TextBlock
-            HorizontalAlignment="Center"
-            TextAlignment="Center"
-            Text="Смени" 
-            TextWrapping="Wrap"/>
-          </StackPanel>
-        </TabItem.Header>
-        <TextBlock Text="TODO" />
       </TabItem>
     </TabControl>
   </Grid>

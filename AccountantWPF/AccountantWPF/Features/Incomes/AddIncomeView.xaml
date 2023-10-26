@@ -11,29 +11,72 @@
              d:DesignWidth="800"
              mc:Ignorable="d" >
   <Grid>
-    <materialDesign:Card Margin="20">
+    <materialDesign:Card Margin="10">
       <Grid Margin="15">
         <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+          <RowDefinition Height="35" />
+
         </Grid.RowDefinitions>
         <TextBox 
           Grid.Row="0"
-          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-          materialDesign:HintAssist.Hint="Име"
-          Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Приход"
+          Text="{Binding IncomeName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox 
+          Grid.Row="1"
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Обект"
+          Text="{Binding CashPosName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox 
+          Grid.Row="2"
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Каса"
+          Text="{Binding CashRegisterName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox 
+          Grid.Row="3"
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Смяна"
+          Text="{Binding ShiftName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox 
+          Grid.Row="4"
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Касиер"
+          Text="{Binding CashierName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox 
+          Grid.Row="5"
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Кеш от смяната"
+          Text="{Binding ShiftCash, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" />
+        <TextBox 
+          Grid.Row="6"
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Пос от смяната"
+          Text="{Binding ShiftPos, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" />
+        <TextBox 
+          Grid.Row="7"
+          Style="{StaticResource MaterialDesignTextBox}"
+          materialDesign:HintAssist.Hint="Бонета бройка"
+          Text="{Binding Bonnets, UpdateSourceTrigger=PropertyChanged}" />
 
         <DatePicker 
            SelectedDate="{Binding CreatedOn, UpdateSourceTrigger=PropertyChanged}"
-           Grid.Row="1"
+           Grid.Row="8"
            materialDesign:HintAssist.Hint="Дата на създаване"
            HorizontalAlignment="Left"
            Width="180" />
 
         <Button 
           HorizontalAlignment="Right"
-          Grid.Row="2"
+          Grid.Row="9"
           Content="Запазване" 
           Command="{Binding SubmitCommand}" />
       </Grid>
