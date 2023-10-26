@@ -34,6 +34,11 @@ namespace AccountantWPF.BaseRepositories
         {
             var entity = await base.ByNameAndDateAsync(name, date);
 
+            if (entity == null)
+            {
+                return null;
+            }
+
             if (entity.IsDeleted)
             {
                 return null;

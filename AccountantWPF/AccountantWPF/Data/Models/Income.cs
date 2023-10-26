@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-using AccountantWPF.Data.BaseModels;
+﻿using AccountantWPF.Data.BaseModels;
 
 namespace AccountantWPF.Data.Models
 {
