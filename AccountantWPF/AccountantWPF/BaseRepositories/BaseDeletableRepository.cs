@@ -3,7 +3,7 @@ using AccountantWPF.Data.BaseModels;
 
 namespace AccountantWPF.BaseRepositories
 {
-    public abstract class BaseDeletableRepository<TEntity> : BaseRepository<TEntity>, IDeletableRepository<TEntity> 
+    public abstract class BaseDeletableRepository<TEntity> : BaseRepository<TEntity>, IDeletableRepository<TEntity>
         where TEntity : BaseDeletableModel
     {
         public BaseDeletableRepository(AccountantDbContext db) : base(db)
@@ -12,8 +12,8 @@ namespace AccountantWPF.BaseRepositories
 
         public virtual async Task<ICollection<TEntity>> AllWithDeleted() => await base.AllAsync();
 
-        public virtual async Task<TEntity> ByNameAndDateWithDeletedAsync(string name, DateTime date) 
-            => await base.ByNameAndDateAsync(name, date);
+        public virtual async Task<TEntity> ByNameAndDateWithDeletedAsync(int parentId, string name, DateTime date)
+            => await base.ByNameAndDateAsync(parentId, name, date);
 
         public virtual async Task HardDelete(TEntity entity) => await base.Delete(entity);
 
@@ -30,9 +30,9 @@ namespace AccountantWPF.BaseRepositories
             return entities.Where(x => !x.IsDeleted).ToList();
         }
 
-        public override async Task<TEntity> ByNameAndDateAsync(string name, DateTime date)
+        public override async Task<TEntity> ByNameAndDateAsync(int parentId, string name, DateTime date)
         {
-            var entity = await base.ByNameAndDateAsync(name, date);
+            var entity = await base.ByNameAndDateAsync(parentId, name, date);
 
             if (entity == null)
             {

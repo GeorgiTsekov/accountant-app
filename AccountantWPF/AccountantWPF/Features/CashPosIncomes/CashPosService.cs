@@ -19,9 +19,9 @@ namespace AccountantWPF.Features.CashPosIncomes
             return entities;
         }
 
-        public override async Task<CashPos> ByNameAndDateAsync(string name, DateTime date)
+        public override async Task<CashPos> ByNameAndDateAsync(int parentId, string name, DateTime date)
         {
-            return await DbSet.Include(x => x.CashRegisters).ThenInclude(a => a.Shifts).Where(x => !x.IsDeleted).SingleOrDefaultAsync(x => x.Name == name && x.CreatedOn == date);
+            return await DbSet.Include(x => x.CashRegisters).ThenInclude(a => a.Shifts).Where(x => !x.IsDeleted && x.ParentId == parentId).SingleOrDefaultAsync(x => x.Name == name && x.CreatedOn == date);
         }
     }
 }

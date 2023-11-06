@@ -14,14 +14,26 @@ namespace AccountantWPF.Features.Incomes
 
         public override async Task<ICollection<Income>> AllAsync()
         {
-            var entities = await DbSet.Include(x => x.CashPosIncomes).ThenInclude(x => x.CashRegisters).ThenInclude(a => a.Shifts).ToListAsync();
+            var entities = await DbSet
+                .Include(x => x.CashPosIncomes)
+                .ThenInclude(x => x.CashRegisters)
+                .ThenInclude(a => a.Shifts)
+                .ToListAsync();
+
             entities = entities.Where(x => !x.IsDeleted).OrderByDescending(x => x.CreatedOn).ToList();
             return entities;
         }
 
-        public override async Task<Income> ByNameAndDateAsync(string name, DateTime date)
+        public override async Task<Income> ByNameAndDateAsync(int parentId, string name, DateTime date)
         {
-            return await DbSet.Include(x => x.CashPosIncomes).ThenInclude(x => x.CashRegisters).ThenInclude(a => a.Shifts).Where(x => !x.IsDeleted).SingleOrDefaultAsync(x => x.Name == name && x.CreatedOn == date);
+            var entity = await DbSet
+                .Include(x => x.CashPosIncomes)
+                .ThenInclude(x => x.CashRegisters)
+                .ThenInclude(a => a.Shifts)
+                .Where(x => !x.IsDeleted)
+                .SingleOrDefaultAsync(x => x.Name == name && x.CreatedOn == date);
+
+            return entity;
         }
     }
 }

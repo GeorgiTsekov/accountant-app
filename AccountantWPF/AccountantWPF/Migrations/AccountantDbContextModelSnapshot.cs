@@ -42,6 +42,9 @@ namespace AccountantWPF.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IncomeId");
@@ -74,6 +77,9 @@ namespace AccountantWPF.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CashPosId");
@@ -102,6 +108,9 @@ namespace AccountantWPF.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -141,6 +150,9 @@ namespace AccountantWPF.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Pos")
                         .HasColumnType("decimal(18,2)");
