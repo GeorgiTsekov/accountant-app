@@ -10,11 +10,11 @@
             InitializeComponent();
         }
 
-        private async void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             if (DataContext is ViewIncomesViewModel viewModel)
             {
-                await viewModel.LoadOutstandingIncomes();
+                viewModel.LoadOutstandingIncomes();
             }
         }
     }

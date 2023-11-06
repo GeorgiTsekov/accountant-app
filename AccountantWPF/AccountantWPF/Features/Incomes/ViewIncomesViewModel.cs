@@ -2,7 +2,6 @@
 using System.Windows.Data;
 
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace AccountantWPF.Features.Incomes
 {
@@ -16,19 +15,14 @@ namespace AccountantWPF.Features.Incomes
         {
             _incomeService = incomeService;
             BindingOperations.EnableCollectionSynchronization(Incomes, new());
+            LoadOutstandingIncomes();
         }
 
-        [RelayCommand]
-        public async Task OnRefresh()
-        {
-            await LoadOutstandingIncomes();
-        }
-
-        public async Task LoadOutstandingIncomes()
+        public void LoadOutstandingIncomes()
         {
             Incomes.Clear();
 
-            foreach (var income in await _incomeService.AllAsync())
+            foreach (var income in _incomeService.AllAsync().GetAwaiter().GetResult())
             {
                 Incomes.Add(new IncomeViewModel(income));
             }

@@ -84,7 +84,7 @@ namespace AccountantWPF.Features.Incomes
                 return;
             }
 
-            var income = await _incomeService.ByNameAndDateAsync(IncomeName, CreatedOn.Value);
+            var income = await _incomeService.ByNameAndDateAsync(default, IncomeName, CreatedOn.Value);
 
             if (income == null)
             {
@@ -97,15 +97,16 @@ namespace AccountantWPF.Features.Incomes
                 await _incomeService.CreateAsync(income);
             }
 
-            var cashPos = await _cashPosService.ByNameAndDateAsync(CashPosName, CreatedOn.Value);
+            var cashPos = await _cashPosService.ByNameAndDateAsync(income.Id, CashPosName, CreatedOn.Value);
 
-            if (cashPos == null)
+            if (cashPos == null || cashPos.IncomeId != income.Id)
             {
                 cashPos = new CashPos
                 {
                     CreatedOn = CreatedOn.Value.Date,
                     Name = CashPosName,
-                    IncomeId = income.Id
+                    IncomeId = income.Id,
+                    ParentId = income.Id
                 };
 
                 await _cashPosService.CreateAsync(cashPos);
@@ -115,15 +116,16 @@ namespace AccountantWPF.Features.Incomes
                 //_messageQueue.Enqueue("There is a asdas with same name and date!");
             }
 
-            var cashRegister = await _cashRegisterService.ByNameAndDateAsync(CashRegisterName, CreatedOn.Value);
+            var cashRegister = await _cashRegisterService.ByNameAndDateAsync(cashPos.Id, CashRegisterName, CreatedOn.Value);
 
-            if (cashRegister == null)
+            if (cashRegister == null || cashRegister.CashPosId != cashPos.Id)
             {
                 cashRegister = new CashRegister
                 {
                     CreatedOn = CreatedOn.Value.Date,
                     Name = CashRegisterName,
-                    CashPosId = cashPos.Id
+                    CashPosId = cashPos.Id,
+                    ParentId = cashPos.Id
                 };
 
                 await _cashRegisterService.CreateAsync(cashRegister);
@@ -133,9 +135,9 @@ namespace AccountantWPF.Features.Incomes
                 //_messageQueue.Enqueue("There is a asdas with same name and date!");
             }
 
-            var shift = await _shiftService.ByNameAndDateAsync(ShiftName, CreatedOn.Value);
+            var shift = await _shiftService.ByNameAndDateAsync(cashRegister.Id, ShiftName, CreatedOn.Value);
 
-            if (shift == null)
+            if (shift == null || shift.CashRegisterId != cashRegister.Id)
             {
                 shift = new Shift
                 {
@@ -145,7 +147,8 @@ namespace AccountantWPF.Features.Incomes
                     Bonnets = Bonnets,
                     Pos = ShiftPos.Value,
                     Cash = ShiftCash.Value,
-                    CashRegisterId = cashRegister.Id
+                    CashRegisterId = cashRegister.Id,
+                    ParentId = cashRegister.Id
                 };
 
                 var created = await _shiftService.CreateAsync(shift);

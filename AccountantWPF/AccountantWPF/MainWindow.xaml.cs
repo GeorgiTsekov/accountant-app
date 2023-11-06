@@ -12,7 +12,6 @@ public partial class MainWindow
     public MainWindow(ViewIncomesViewModel viewIncomesModelModel, AddIncomeViewModel addIncomeViewModel)
     {
         //DataContext = viewModel;
-
         InitializeComponent();
 
         AddIncomeView.DataContext = addIncomeViewModel;

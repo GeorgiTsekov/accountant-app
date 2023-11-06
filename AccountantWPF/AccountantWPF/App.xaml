@@ -6,16 +6,15 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <materialDesign:BundledTheme BaseTheme="Inherit" 
-                                     PrimaryColor="Purple" 
-                                     SecondaryColor="LightGreen" />
+        <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
 
-        <ResourceDictionary
-                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
       </ResourceDictionary.MergedDictionaries>
 
-      <Style TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignAccentCheckBox}" />
+      <Style TargetType="Window" x:Key="WindowStyle">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}" />
+      </Style>
     </ResourceDictionary>
   </Application.Resources>
 </Application>
