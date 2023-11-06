@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 using AccountantWPF.Data.Models;
 using AccountantWPF.Features.CashPosIncomes;
@@ -18,6 +19,10 @@ namespace AccountantWPF.Features.Incomes
         private readonly ShiftService _shiftService;
 
         //private readonly ISnackbarMessageQueue _messageQueue;
+        public ObservableCollection<string> IncomeNames { get; } = new();
+        public ObservableCollection<string> CashPosNames { get; } = new();
+        public ObservableCollection<string> CashRegisterNames { get; } = new();
+        public ObservableCollection<string> ShiftNames { get; } = new();
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
@@ -67,7 +72,35 @@ namespace AccountantWPF.Features.Incomes
             _cashPosService = cashPosService;
             _cashRegisterService = cashRegisterService;
             _shiftService = shiftService;
+            LoadOutstandingIncomes();
             //_messageQueue = messageQueue ?? throw new ArgumentNullException(nameof(messageQueue));
+        }
+
+        public void LoadOutstandingIncomes()
+        {
+            IncomeNames.Clear();
+            foreach (var income in _incomeService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            {
+                IncomeNames.Add(income);
+            }
+
+            CashPosNames.Clear();
+            foreach (var income in _cashPosService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            {
+                CashPosNames.Add(income);
+            }
+
+            CashRegisterNames.Clear();
+            foreach (var income in _cashRegisterService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            {
+                CashRegisterNames.Add(income);
+            }
+
+            ShiftNames.Clear();
+            foreach (var income in _shiftService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            {
+                ShiftNames.Add(income);
+            }
         }
 
         [RelayCommand(CanExecute = nameof(CanSubmit))]
