@@ -65,6 +65,7 @@ public partial class App : Application
 
             services.AddSingleton<IncomeService>();
             services.AddSingleton<ViewIncomesViewModel>();
+            services.AddSingleton<SingleIncomeViewModel>();
             services.AddSingleton<AddIncomeViewModel>();
             services.AddSingleton<CashPosService>();
             services.AddSingleton<CashRegisterService>();

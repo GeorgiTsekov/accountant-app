@@ -72,7 +72,7 @@
             TextWrapping="Wrap"/>
           </StackPanel>
         </TabItem.Header>
-        <TextBlock d:Text="TODO" />
+        <incomes:SingleIncomeView x:Name="ViewIncomeView" />
       </TabItem>
     </TabControl>
   </Grid>
