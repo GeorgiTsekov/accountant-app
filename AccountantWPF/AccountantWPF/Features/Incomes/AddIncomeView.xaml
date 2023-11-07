@@ -32,8 +32,10 @@
         <ComboBox 
           Name="Приход" 
           Grid.Column="0" 
-          Grid.Row="0" Margin="5" 
+          Grid.Row="0" 
+          Margin="5" 
           ItemsSource="{Binding IncomeNames}"
+          materialDesign:HintAssist.Hint="Приход"
           Text="{Binding IncomeName, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox 
           Grid.Row="0"  
@@ -44,8 +46,10 @@
         <ComboBox 
           Name="Обект" 
           Grid.Column="0" 
-          Grid.Row="1" Margin="5" 
+          Grid.Row="1" 
+          Margin="5" 
           ItemsSource="{Binding CashPosNames}"
+          materialDesign:HintAssist.Hint="Обект"
           Text="{Binding CashPosName, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox 
           Grid.Row="1"
@@ -56,7 +60,9 @@
         <ComboBox 
           Name="Каса" 
           Grid.Column="0" 
-          Grid.Row="2" Margin="5" 
+          Grid.Row="2" 
+          Margin="5" 
+          materialDesign:HintAssist.Hint="Каса"
           ItemsSource="{Binding CashRegisterNames}"
           Text="{Binding CashRegisterName, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox 
@@ -68,7 +74,9 @@
         <ComboBox 
           Name="Смяна" 
           Grid.Column="0" 
-          Grid.Row="3" Margin="5" 
+          Grid.Row="3" 
+          Margin="5" 
+          materialDesign:HintAssist.Hint="Смяна"
           ItemsSource="{Binding ShiftNames}"
           Text="{Binding ShiftName, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox 
@@ -77,6 +85,14 @@
           Style="{StaticResource MaterialDesignTextBox}"
           materialDesign:HintAssist.Hint="Смяна"
           Text="{Binding ShiftName, UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox 
+          Name="Касиер" 
+          Grid.Column="0" 
+          Grid.Row="4" 
+          Margin="5" 
+          materialDesign:HintAssist.Hint="Касиер"
+          ItemsSource="{Binding CashierNames}"
+          Text="{Binding CashierName, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox 
           Grid.Row="4"
           Grid.Column="1" 

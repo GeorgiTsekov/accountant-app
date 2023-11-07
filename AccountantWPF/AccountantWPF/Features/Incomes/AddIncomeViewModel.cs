@@ -23,6 +23,7 @@ namespace AccountantWPF.Features.Incomes
         public ObservableCollection<string> CashPosNames { get; } = new();
         public ObservableCollection<string> CashRegisterNames { get; } = new();
         public ObservableCollection<string> ShiftNames { get; } = new();
+        public ObservableCollection<string> CashierNames { get; } = new();
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
@@ -79,27 +80,33 @@ namespace AccountantWPF.Features.Incomes
         public void LoadOutstandingIncomes()
         {
             IncomeNames.Clear();
-            foreach (var income in _incomeService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            foreach (var name in _incomeService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
             {
-                IncomeNames.Add(income);
+                IncomeNames.Add(name);
             }
 
             CashPosNames.Clear();
-            foreach (var income in _cashPosService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            foreach (var name in _cashPosService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
             {
-                CashPosNames.Add(income);
+                CashPosNames.Add(name);
             }
 
             CashRegisterNames.Clear();
-            foreach (var income in _cashRegisterService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            foreach (var name in _cashRegisterService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
             {
-                CashRegisterNames.Add(income);
+                CashRegisterNames.Add(name);
             }
 
             ShiftNames.Clear();
-            foreach (var income in _shiftService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
+            foreach (var name in _shiftService.AllAsync().GetAwaiter().GetResult().Select(x => x.Name))
             {
-                ShiftNames.Add(income);
+                ShiftNames.Add(name);
+            }
+
+            CashierNames.Clear();
+            foreach (var name in _shiftService.AllAsync().GetAwaiter().GetResult().Select(x => x.CashierName))
+            {
+                CashierNames.Add(name);
             }
         }
 
